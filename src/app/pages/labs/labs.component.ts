@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, signal } from '@angular/core';
-
+import { Component, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms'
 @Component({
   selector: 'app-labs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css',
 })
@@ -66,5 +66,23 @@ export class LabsComponent {
   keydownHandler(event: KeyboardEvent) {
     const input = event.target as HTMLInputElement;
     console.log(input.value);
+  }
+
+  colorControl = new FormControl();
+  widthControl = new FormControl(50,{
+    nonNullable: true
+  });
+
+  nameControl = new FormControl(50,{
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.minLength(3)
+    ]
+  });
+  constructor(){
+    this.colorControl.valueChanges.subscribe(value =>{
+      console.log(value)
+    })
   }
 }

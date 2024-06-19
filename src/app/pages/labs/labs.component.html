@@ -60,4 +60,42 @@
   <ng-template #elseBlock>
     soy david y tengo menos de 18 anios
   </ng-template>
+
+  <hr>
+  <p>(change)</p>
+  <input type="text" [value]="person().name" (change)="changeName($event)">
+  <div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'nicolas'">Yo soy nicolas</p>
+    <p *ngSwitchCase="'david'">Yo soy david</p>
+    <p *ngSwitchCase="'susan'">Yo soy susan</p>
+    <p *ngSwitchCase="'ana'">Yo soy ana</p>
+    <p *ngSwitchCase="'valentina'">Yo soy valentina</p>
+    <p *ngSwitchDefault>Yo soy nadie</p>
+
+  </div>
+
+  <hr>
+  <input type="color" [formControl]="colorControl">
+  <p> color: {{colorControl.value}}</p>
+
+  <hr>
+  <svg>
+    <g>
+      <rect x="0" y="0" height="100" width="200" [attr.fill]="colorControl.value"></rect>
+    </g>
+  </svg>
+  <hr>
+  <input type="number" [formControl]="widthControl">
+  <span class="box" [style.width.px]="widthControl.value"></span>
+
+  <hr>
+  <p>
+    <input type="text" [formControl]="nameControl"> <br>
+    <span class="message-error" [class.show]="nameControl.invalid && nameControl.touched">Nombre invalido</span>
+  </p>
+  <p>
+      <input type="text">
+  </p>
+
+
 </div>
