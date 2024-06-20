@@ -65,7 +65,41 @@ export class HomeComponent {
         }
         return task;
       })
-    } )
+    } );
+  }
+
+  updateTaskEditingMode(index: number){
+    this.tasks.update((tasks)=> {
+      return tasks.map((task, position)=>{
+        if(position === index){
+          return {
+            ...task,
+            editing: true
+          }
+        }
+        return {
+          ...task,
+          editing: false
+        }
+      })
+    } );
+  }
+
+  updateTaskText(index: number, event: Event){
+    const input =event.target as HTMLInputElement;
+    this.tasks.update(prevState=>{
+      return prevState.map((task, position)=>{
+        if(position === index){
+          return {
+            ...task,
+            title: input.value,
+            editing: false
+          }
+        }
+        return task;
+      }
+    )
+    });
   }
 
 }
